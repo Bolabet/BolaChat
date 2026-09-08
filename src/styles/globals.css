@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  /* BolaChat brand tokens. Dark, high-contrast, black & white photography,
+     WhatsApp green as the single accent — matches the live product. */
+  --background: #0a0d0c;
+  --background-elevated: #121715;
+  --background-elevated-2: #181f1c;
+  --foreground: #f5f7f6;
+  --muted: #9aa39f;
+  --border: #232b28;
+  --accent: #25d366;
+  --accent-strong: #1fb356;
+  --accent-foreground: #04170d;
+  --danger: #f97066;
+
+  --container-max: 72rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.875rem;
+  --radius-sm: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-elevated-2: var(--background-elevated-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius-lg: var(--radius-lg);
+  --radius-md: var(--radius-md);
+  --radius-sm: var(--radius-sm);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Visible focus states for keyboard navigation (accessibility requirement). */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
