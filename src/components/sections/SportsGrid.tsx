@@ -35,7 +35,7 @@ export function SportsGrid() {
           {sports.map((sport) => (
             <div
               key={sport.name}
-              className="overflow-hidden rounded-2xl border border-border bg-background-elevated"
+              className="overflow-hidden rounded-md border border-border bg-background-elevated"
             >
               <SportArt
                 variant={sport.variant}
@@ -43,7 +43,7 @@ export function SportsGrid() {
                 className="aspect-[4/3] w-full"
               />
               <div className="p-5">
-                <p className="font-semibold">{sport.name}</p>
+                <p className="font-heading text-base normal-case">{sport.name}</p>
                 <p className="mt-1 text-sm leading-relaxed text-muted">
                   {sport.body}
                 </p>

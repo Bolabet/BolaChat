@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { markets, marketCodes } from "@/config/markets";
 import { Container } from "@/components/ui/Container";
+import { BolaWordmark } from "@/components/ui/BolaWordmark";
 
 export const metadata: Metadata = {
   title: "BolaChat - choose your country",
@@ -20,10 +21,8 @@ export default function RootPage() {
   return (
     <main className="flex flex-1 items-center justify-center py-24">
       <Container className="max-w-lg text-center">
-        <p className="text-lg font-extrabold tracking-tight">
-          BOLA<span className="text-accent">CHAT</span>
-        </p>
-        <h1 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
+        <BolaWordmark className="text-lg" />
+        <h1 className="font-heading mt-4 text-2xl sm:text-3xl">
           Choose your country
         </h1>
         <p className="mt-3 text-sm text-muted">
@@ -37,7 +36,7 @@ export default function RootPage() {
               <Link
                 key={code}
                 href={`/${code}`}
-                className="rounded-full border border-border bg-background-elevated px-6 py-3.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
+                className="rounded-md border border-border bg-background-elevated px-6 py-3.5 text-sm font-semibold transition-colors hover:border-accent hover:text-accent"
               >
                 {market.countryName}
               </Link>

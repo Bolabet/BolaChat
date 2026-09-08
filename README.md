@@ -9,18 +9,59 @@ This is **not** a redesign. It reproduces the live product's structure and
 copy, on a clean architecture that can add new countries without touching
 presentation code.
 
+## Brand system
+
+Visual design follows the **Bolabet Corporate Identity Manual v1.0** (the
+parent brand's CI, applied here to the BolaChat sub-brand):
+
+- **Colour** (CI 3.1/3.2): Pitch Black `#231F20` background, Action Yellow
+  `#F5E500` as the single accent, Chalk White `#FFFFFF` text. This is the
+  CI's "Home Kit" (3.3) - the black/yellow combination specified for core
+  sports betting product UI.
+- **One deliberate exception**: WhatsApp CTA buttons use WhatsApp's own
+  green (`--whatsapp` in `globals.css`), not Action Yellow, so they still
+  read as "this opens WhatsApp" at a glance. Every other accent on the site
+  - links, badges, focus states, the wordmark split - is Action Yellow. See
+  `Button.tsx`: the `whatsapp` variant is reserved for wa.me links only.
+- **Typography** (CI 2.1/2.2): Archivo (weight 900, italic, uppercase, tight
+  tracking) for headlines via the `.font-heading` utility class; Inter for
+  body/UI text, with tabular lining numerals turned on site-wide
+  (`font-feature-settings: "tnum"`) so odds and amounts align in columns -
+  apply the `tabular-nums` class directly to any new numeric display.
+  Both fonts are self-hosted via `@fontsource-variable/*` (no runtime call
+  to Google's font CDN).
+- **The Bola Angle** (CI 4.1): `-9.45deg`, stored as `--bola-angle`.
+  Applied to graphic elements only (the `BolaSlash` component, the
+  Responsible Gaming badge's plates, the half-tone texture) - never to
+  running text, which gets its slant from the italic headline typeface
+  instead.
+- **The Bola Half-tone** (CI 4.4): a faded dot-matrix texture, implemented
+  as the `.bola-halftone` CSS utility (see `SportArt.tsx` for usage).
+- **The 18+ badge** (CI 2.4) is a defined graphic asset, not just body
+  copy - see `ResponsibleGamingBadge.tsx`, used in the Footer.
+- **The wordmark split** (CI 1.1): `BolaWordmark.tsx` reproduces the
+  BOLA/BET colour-split pattern for BOLA/CHAT.
+
+New brand-system components live in `src/components/ui/`:
+`BolaWordmark.tsx`, `BolaSlash.tsx`, `ResponsibleGamingBadge.tsx`.
+
 ## Stack
 
 - **Next.js 16** (App Router, static generation)
 - **TypeScript**
 - **Tailwind CSS v4**
 - **ESLint** (`eslint-config-next`)
-- Zero UI/animation libraries - everything is hand-built Tailwind + plain SVG
+- **Archivo** and **Inter** (self-hosted via `@fontsource-variable/*`) for
+  brand typography - see "Brand system" above
+- Zero UI/animation libraries beyond the fonts above - everything else is
+  hand-built Tailwind + plain SVG
 
-No Google font dependency either: type uses the OS system font stack
-(`-apple-system`, `Segoe UI`, Roboto, etc.) instead of `next/font/google`, so
-the build never depends on reaching fonts.googleapis.com. That's one less
-thing that can fail in a locked-down CI/build environment.
+No Google Fonts CDN dependency: fonts are bundled as static files through
+npm (`@fontsource-variable/archivo`, `@fontsource-variable/inter`) rather
+than loaded via `next/font/google`, so the build never depends on reaching
+fonts.googleapis.com at request time - one less thing that can fail in a
+locked-down CI/build environment, and one fewer third-party network request
+for visitors.
 
 ## Project structure
 
@@ -196,6 +237,11 @@ traffic the Worker can't classify.
 
 ## What differs from the live site
 
+- **Colour and typography now follow the Bolabet Corporate Identity Manual
+  v1.0** (Action Yellow / Pitch Black, Archivo + Inter) rather than the
+  live bolachat.io page's own look - this is a deliberate, explicit brand
+  decision, not a gap. WhatsApp buttons are the one intentional exception
+  (see "Brand system" above).
 - **Photography**: replaced with placeholder duotone panels - see
   "Adding photography assets" above. This is the one thing that
   couldn't be reproduced automatically (copying the live site's actual

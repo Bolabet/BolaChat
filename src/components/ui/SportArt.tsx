@@ -36,7 +36,7 @@ export function SportArt({
       role="img"
       aria-label={label ?? `${variant} illustration`}
       className={cx(
-        "relative flex items-center justify-center overflow-hidden rounded-2xl",
+        "relative flex items-center justify-center overflow-hidden rounded-md",
         "bg-gradient-to-br from-background-elevated-2 via-background-elevated to-background",
         className
       )}
@@ -45,9 +45,11 @@ export function SportArt({
         className="absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 30% 20%, rgba(37,211,102,0.25), transparent 45%), radial-gradient(circle at 80% 80%, rgba(37,211,102,0.12), transparent 40%)",
+            "radial-gradient(circle at 30% 20%, rgba(245,229,0,0.20), transparent 45%), radial-gradient(circle at 80% 80%, rgba(245,229,0,0.10), transparent 40%)",
         }}
       />
+      {/* CI 4.4 Bola Half-tone: gritty dot-matrix texture over the colour block. */}
+      <div className="bola-halftone text-accent" aria-hidden="true" />
       <svg
         viewBox="0 0 64 64"
         className="relative h-16 w-16 text-accent/80 sm:h-20 sm:w-20"

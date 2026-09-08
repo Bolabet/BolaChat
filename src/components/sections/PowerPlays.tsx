@@ -2,6 +2,7 @@ import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { BolaSlash } from "@/components/ui/BolaSlash";
 import { getPowerPlaysWhatsAppUrl } from "@/lib/whatsapp";
 
 export function PowerPlays({ market }: { market: MarketConfig }) {
@@ -30,7 +31,7 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           />
 
           <div className="mt-6 flex flex-col items-start gap-2">
-            <Button href={whatsAppUrl} size="lg">
+            <Button href={whatsAppUrl} variant="whatsapp" size="lg">
               {market.ctaLabels.powerPlays}
             </Button>
             <p className="text-xs text-muted">
@@ -47,7 +48,8 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border bg-background p-6 sm:p-8">
+        <div className="relative overflow-hidden rounded-md border border-border bg-background-elevated-2 p-6 sm:p-8">
+          <BolaSlash className="absolute -right-6 -top-6 h-16 w-16 opacity-90" />
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
             Powerplay
           </p>
@@ -56,10 +58,10 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           </p>
 
           <div className="mt-4 flex items-center justify-between gap-4 border-b border-border pb-4">
-            <p className="text-lg font-bold">{example.fixture}</p>
+            <p className="font-heading text-lg normal-case">{example.fixture}</p>
             <div className="text-right">
               <p className="text-xs text-muted">{example.market}</p>
-              <p className="text-xl font-extrabold text-accent">
+              <p className="text-xl font-extrabold tabular-nums text-accent">
                 {example.odds}
               </p>
             </div>
@@ -68,7 +70,7 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           <p className="mt-4 text-sm leading-relaxed text-muted">
             Play{" "}
             <strong className="text-foreground">
-              {example.minStake} or more
+              <span className="tabular-nums">{example.minStake}</span> or more
             </strong>{" "}
             and get{" "}
             <strong className="text-foreground">

@@ -37,7 +37,7 @@ export function HowItWorks() {
           <ol className="mt-8 space-y-6">
             {steps.map((step) => (
               <li key={step.number} className="flex gap-4">
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-sm font-bold text-accent">
+                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-accent/40 bg-accent/10 font-heading text-sm not-italic text-accent">
                   {step.number}
                 </span>
                 <div>

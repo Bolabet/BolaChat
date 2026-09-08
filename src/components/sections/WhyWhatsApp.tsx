@@ -23,7 +23,7 @@ export function WhyWhatsApp() {
           {points.map((point) => (
             <li
               key={point}
-              className="flex flex-1 items-start gap-3 rounded-xl border border-border bg-background p-5"
+              className="flex flex-1 items-start gap-3 rounded-md border border-border bg-background p-5"
             >
               <svg
                 viewBox="0 0 20 20"
