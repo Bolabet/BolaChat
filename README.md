@@ -147,26 +147,13 @@ config file is the config.
 
 ## Adding photography assets
 
-The live site uses black-and-white sports photography (a soccer player,
-a basketball player, a boxer) that is not this project's to copy. Every
-image slot in this rebuild (`Hero`, `SportsGrid`) currently renders
-`<SportArt />` - a lightweight duotone/SVG placeholder in brand colours -
-instead. To swap in real photography:
-
-1. Drop the final images into `public/images/sports/` (e.g. `soccer.jpg`).
-2. Replace the relevant `<SportArt variant="soccer" ... />` usage with:
-   ```tsx
-   import Image from "next/image";
-
-   <Image
-     src="/images/sports/soccer.jpg"
-     alt="Soccer on BolaChat"
-     fill
-     className="object-cover"
-   />
-   ```
-3. Keep the parent element's `aspect-[4/3]` (or similar) class so layout
-   doesn't shift.
+Photography lives in `public/images/sports/` and is rendered with
+`next/image` in `Hero` (`epl.jpg`) and `SportsGrid`
+(`soccer.jpg`, `cricket.jpg`, `rugby.jpg`). To swap an image, replace the
+file (keep the name) or change the `src` in the component. Each image sits
+in a parent with a fixed aspect ratio (`aspect-[4/3]`) and uses `object-cover`, so layout doesn't
+shift. `<SportArt />` is kept as a fallback placeholder but is no longer
+used on the page.
 
 ## Installation & local development
 
