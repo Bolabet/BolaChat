@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-import { SportArt } from "@/components/ui/SportArt";
+import Image from "next/image";
 import { BolaSlash } from "@/components/ui/BolaSlash";
 import { getDefaultWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -59,10 +59,13 @@ export function Hero({ market }: { market: MarketConfig }) {
 
         <div className="relative aspect-[4/3] w-full lg:aspect-square">
           <BolaSlash className="absolute -inset-x-4 top-6 h-10 opacity-90 sm:h-14" />
-          <SportArt
-            variant="hero"
-            label="BolaChat - sports betting inside WhatsApp"
-            className="absolute inset-0"
+          <Image
+            src="/images/sports/epl.jpg"
+            alt="BolaChat - sports betting inside WhatsApp"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="rounded-md object-cover"
           />
         </div>
       </Container>
