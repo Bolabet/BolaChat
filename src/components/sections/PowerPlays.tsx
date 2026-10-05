@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -10,7 +11,19 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
   const example = market.copy.powerPlayExample;
 
   return (
-    <section className="border-y border-border bg-background-elevated py-16 sm:py-20">
+    <section className="relative isolate overflow-hidden border-y border-border bg-background py-16 sm:py-20">
+      {/* Stadium backdrop with a dark overlay so copy stays legible. */}
+      <Image
+        src="/images/sports/soccer-kick.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="-z-20 object-cover object-center"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-background/95 via-background/85 to-background/70"
+      />
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
           <SectionHeading
@@ -48,7 +61,7 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-md border border-border bg-background-elevated-2 p-6 sm:p-8">
+        <div className="relative overflow-hidden rounded-md border border-border bg-background-elevated-2/90 p-6 backdrop-blur-sm sm:p-8">
           <BolaSlash className="absolute -right-6 -top-6 h-16 w-16 opacity-90" />
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
             Powerplay
