@@ -25,13 +25,13 @@ export const sportsCatalog: Record<SportKey, SportCardData> = {
   basketball: {
     name: "Basketball",
     body: "Pro and college. Pace, props, spreads and live lines.",
-    // TODO: add /images/sports/basketball.jpg and set it here.
+    image: "/images/sports/Basketball Chat.jpeg",
     art: "basketball",
   },
   boxing: {
     name: "Boxing",
     body: "Every card, every bout. Records, styles and the odds before the bell.",
-    // TODO: add /images/sports/boxing.jpg and set it here.
+    image: "/images/sports/Boxing chat.jpeg",
     art: "boxing",
   },
   cricket: {
