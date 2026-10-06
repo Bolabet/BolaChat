@@ -5,6 +5,7 @@ import { ChannelButtons } from "@/components/ui/ChannelButtons";
 import { Badge } from "@/components/ui/Badge";
 import Image from "next/image";
 import { BolaSlash } from "@/components/ui/BolaSlash";
+import { channelNames } from "@/lib/channels";
 
 export function Hero({ market }: { market: MarketConfig }) {
   return (
@@ -26,7 +27,7 @@ export function Hero({ market }: { market: MarketConfig }) {
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
             Ask anything about your teams and matches, get the real numbers,
-            and place your play. No new app. Right inside WhatsApp and Telegram.
+            and place your play. No new app. Right inside {channelNames(market)}.
           </p>
 
           <div className="mt-8 flex flex-col gap-3">
@@ -53,7 +54,7 @@ export function Hero({ market }: { market: MarketConfig }) {
           <BolaSlash className="absolute -inset-x-4 top-6 h-10 opacity-90 sm:h-14" />
           <Image
             src="/images/sports/epl.jpg"
-            alt="BolaChat - sports betting inside WhatsApp and Telegram"
+            alt={`BolaChat - sports betting inside ${channelNames(market)}`}
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"

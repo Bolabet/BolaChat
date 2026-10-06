@@ -12,17 +12,9 @@ export const zm: MarketConfig = {
   locale: "en-ZM",
 
   whatsapp: {
-    // TODO: replace with the live BolaChat WhatsApp Business number for Zambia.
-    numberE164: "260970000000",
+    numberE164: "260766208966",
     defaultMessage: "Hi BolaChat! I'd like to see today's odds.",
     powerPlaysMessage: "Hi BolaChat! Show me this week's PowerPlays.",
-  },
-
-  telegram: {
-    // TODO: replace with the live BolaChat Telegram bot username for this market.
-    username: "bolachat_zm_bot",
-    defaultStart: "web",
-    powerPlaysStart: "powerplays",
   },
 
   registrationUrl: "https://www.bolabet.co.zm/register",
@@ -65,9 +57,9 @@ export const zm: MarketConfig = {
   sports: ["soccer", "basketball", "boxing"],
 
   seo: {
-    title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp & Telegram",
+    title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Available in Zambia.",
+      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins. Available in Zambia.",
     canonicalUrl: "https://bolachat.io/zm",
     ogImage: "/images/og/bolachat-zm.jpg",
     ogLocale: "en_ZM",

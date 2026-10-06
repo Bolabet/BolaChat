@@ -2,9 +2,43 @@ import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { BolaWordmark } from "@/components/ui/BolaWordmark";
 import { ResponsibleGamingBadge } from "@/components/ui/ResponsibleGamingBadge";
+import { channelNames } from "@/lib/channels";
 
 export function Footer({ market }: { market: MarketConfig }) {
   const year = new Date().getFullYear();
+
+  // Coming-soon markets: legal links, support details and the helpline are
+  // still placeholders, so keep the footer to the brand line, the 18+ badge
+  // and a generic responsible-gambling message.
+  if (market.comingSoon) {
+    return (
+      <footer className="border-t border-border bg-background">
+        <Container className="py-10 sm:py-12">
+          <BolaWordmark className="text-lg" />
+          <p className="mt-2 max-w-sm text-sm text-muted">
+            Your AI sports bookie - coming soon to {market.countryName}.
+          </p>
+
+          <hr className="my-8 border-border" />
+
+          <ResponsibleGamingBadge productName="BolaChat" />
+
+          <p className="mt-6 text-xs leading-relaxed text-muted">
+            <strong className="text-foreground">18+. Play responsibly.</strong>{" "}
+            BolaChat is for entertainment and informational purposes. Betting
+            involves financial risk - only stake what you can afford to lose,
+            and never chase losses. BolaChat is not yet available in{" "}
+            {market.countryName}.
+          </p>
+
+          <p className="mt-4 text-xs text-muted">
+            &copy; {year} BolaChat, part of the Bolabet family. All rights
+            reserved.
+          </p>
+        </Container>
+      </footer>
+    );
+  }
 
   return (
     <footer className="border-t border-border bg-background">
@@ -13,7 +47,7 @@ export function Footer({ market }: { market: MarketConfig }) {
           <div>
             <BolaWordmark className="text-lg" />
             <p className="mt-2 max-w-xs text-sm text-muted">
-              Your sports copilot in WhatsApp and Telegram - {market.countryName}.
+              Your sports copilot in {channelNames(market)} - {market.countryName}.
             </p>
           </div>
 

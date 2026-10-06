@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { ChannelButtons } from "@/components/ui/ChannelButtons";
+import { channelNames } from "@/lib/channels";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BolaSlash } from "@/components/ui/BolaSlash";
 
@@ -48,7 +49,9 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
               intent="powerPlays"
             />
             <p className="text-xs text-muted">
-              Opens WhatsApp or Telegram, ready to chat.
+              {market.telegram
+              ? `Opens ${channelNames(market, "or")}, ready to chat.`
+              : "Opens WhatsApp with your question prefilled."}
             </p>
             <a
               href={market.legal.powerPlaysTermsUrl}

@@ -87,6 +87,7 @@ src/
   lib/
     whatsapp.ts         wa.me URL builder (single source of truth for WhatsApp links)
     telegram.ts         t.me URL builder (single source of truth for Telegram links)
+    channels.ts         channelNames(): "WhatsApp" vs "WhatsApp and Telegram" copy per market
     utils.ts            cx() class-name helper
   types/
     market.ts           MarketConfig contract every market file must satisfy
@@ -105,7 +106,7 @@ codebase instead of three separate sites.
 ## Market configuration
 
 Each market is one file in `src/config/markets/` implementing the
-`MarketConfig` type (`src/types/market.ts`): currency, WhatsApp number, Telegram bot username,
+`MarketConfig` type (`src/types/market.ts`): currency, WhatsApp number, optional Telegram bot username (omit `telegram` for markets without Telegram), optional `comingSoon` flag,
 registration/login/deposit URLs, legal links, support details, SEO
 metadata, and analytics IDs (left empty until you're ready to enable them).
 
@@ -114,9 +115,9 @@ marked `// TODO` in its config file:
 
 | Market | What's a placeholder |
 |---|---|
-| Zambia (`zm.ts`) | WhatsApp Business number, Telegram bot username, helpline contact |
-| Malawi (`mw.ts`) | Domain (`bolabet.co.mw`), WhatsApp number, Telegram bot username, all legal URLs, helpline |
-| Zimbabwe (`zw.ts`) | Domain (`bolabet.co.zw`), currency (USD vs ZiG - confirm with the business), WhatsApp number, Telegram bot username, all legal URLs, helpline |
+| Zambia (`zm.ts`) | Helpline contact (WhatsApp number set; no Telegram in this market) |
+| Malawi (`mw.ts`) | Currently `comingSoon` (renders the coming-soon page). To launch: remove `comingSoon`, add the real WhatsApp number (and a `telegram` block if applicable), then confirm domain, all legal URLs, helpline |
+| Zimbabwe (`zw.ts`) | WhatsApp number and Telegram bot set. Still to confirm: domain (`bolabet.co.zw`), currency (USD vs ZiG), all legal URLs, helpline |
 
 Zambia's domain (`bolabet.co.zm`) and currency (Kwacha, symbol `K`) are
 carried over from the live site's own copy, so those aren't placeholders.

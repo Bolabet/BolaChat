@@ -1,6 +1,7 @@
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { ChannelButtons } from "@/components/ui/ChannelButtons";
+import { channelNames } from "@/lib/channels";
 
 export function FinalCta({ market }: { market: MarketConfig }) {
   return (
@@ -13,7 +14,8 @@ export function FinalCta({ market }: { market: MarketConfig }) {
           Prove <span className="text-accent">you</span> know the game.
         </p>
         <p className="mx-auto mt-4 max-w-md text-base text-muted">
-          Open WhatsApp or Telegram, say hi to BolaChat, and ask your first question.
+          Open {channelNames(market, "or")}, say hi to BolaChat, and ask your
+          first question.
           It&apos;s that simple.
         </p>
         <div className="mt-8 flex justify-center">

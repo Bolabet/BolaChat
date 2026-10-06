@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import type { MarketConfig } from "@/types/market";
 
 const points = [
   "Live stats and odds, explained in plain words",
@@ -7,7 +8,11 @@ const points = [
   "Answers in seconds, any time of day",
 ];
 
-export function WhyMessaging() {
+export function WhyMessaging({ market }: { market: MarketConfig }) {
+  const body = market.telegram
+    ? "BolaChat lives inside the apps you open a hundred times a day - WhatsApp and Telegram. No download, no new password, no clunky betting site."
+    : "BolaChat lives inside the app you open a hundred times a day. No download, no new password, no clunky betting site.";
+
   return (
     <section className="border-y border-border bg-background-elevated py-16 sm:py-20">
       <Container>
@@ -15,7 +20,7 @@ export function WhyMessaging() {
           align="center"
           eyebrow="Where you already are"
           heading="It feels like texting a mate"
-          body="BolaChat lives inside the apps you open a hundred times a day - WhatsApp and Telegram. No download, no new password, no clunky betting site."
+          body={body}
           className="mx-auto"
         />
 

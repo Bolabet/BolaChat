@@ -10,7 +10,9 @@ import { getDefaultTelegramUrl } from "@/lib/telegram";
 
 export function Header({ market }: { market: MarketConfig }) {
   const whatsAppUrl = getDefaultWhatsAppUrl(market.whatsapp);
-  const telegramUrl = getDefaultTelegramUrl(market.telegram);
+  const telegramUrl = market.telegram
+    ? getDefaultTelegramUrl(market.telegram)
+    : null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
@@ -43,18 +45,27 @@ export function Header({ market }: { market: MarketConfig }) {
             aria-label="Chat on WhatsApp"
             className="px-3 text-xs sm:px-5 sm:text-sm"
           >
-            <span className="hidden sm:inline">WhatsApp</span>
+            {telegramUrl ? (
+              <span className="hidden sm:inline">WhatsApp</span>
+            ) : (
+              <>
+                <span className="hidden sm:inline">Chat on WhatsApp</span>
+                <span className="sm:hidden">WhatsApp</span>
+              </>
+            )}
           </Button>
-          <Button
-            href={telegramUrl}
-            variant="telegram"
-            size="md"
-            icon={<TelegramIcon className="h-4 w-4" />}
-            aria-label="Chat on Telegram"
-            className="px-3 text-xs sm:px-5 sm:text-sm"
-          >
-            <span className="hidden sm:inline">Telegram</span>
-          </Button>
+          {telegramUrl && (
+            <Button
+              href={telegramUrl}
+              variant="telegram"
+              size="md"
+              icon={<TelegramIcon className="h-4 w-4" />}
+              aria-label="Chat on Telegram"
+              className="px-3 text-xs sm:px-5 sm:text-sm"
+            >
+              <span className="hidden sm:inline">Telegram</span>
+            </Button>
+          )}
         </div>
       </Container>
     </header>

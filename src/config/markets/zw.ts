@@ -1,12 +1,12 @@
 import type { MarketConfig } from "@/types/market";
 
 /**
- * Zimbabwe - planned rollout market.
+ * Zimbabwe - live on WhatsApp and Telegram.
  * NOTE: Zimbabwe's currency situation is unusual (ZiG alongside widespread
  * USD use in betting). currencyCode/currencySymbol below default to USD as
  * a starting point - confirm with the business which currency BolaChat
- * should actually display before launch. Domain, WhatsApp number, and
- * legal links are structurally correct placeholders flagged TODO.
+ * should actually display. Domain and legal links are structurally correct
+ * placeholders flagged TODO.
  */
 export const zw: MarketConfig = {
   marketCode: "zw",
@@ -16,16 +16,14 @@ export const zw: MarketConfig = {
   locale: "en-ZW",
 
   whatsapp: {
-    // TODO: replace with the live BolaChat WhatsApp Business number for Zimbabwe.
-    numberE164: "263770000000",
+    numberE164: "263780367808",
     defaultMessage: "Hi BolaChat! I'd like to see today's odds.",
     powerPlaysMessage: "Hi BolaChat! Show me this week's PowerPlays.",
   },
 
   // TODO: confirm the production Bolabet Zimbabwe domain.
   telegram: {
-    // TODO: replace with the live BolaChat Telegram bot username for this market.
-    username: "bolachat_zw_bot",
+    username: "bolabet_zw_bot",
     defaultStart: "web",
     powerPlaysStart: "powerplays",
   },
@@ -72,7 +70,7 @@ export const zw: MarketConfig = {
   seo: {
     title: "BolaChat Zimbabwe - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Coming soon to Zimbabwe.",
+      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Available in Zimbabwe.",
     canonicalUrl: "https://bolachat.io/zw",
     ogImage: "/images/og/bolachat-zw.jpg",
     ogLocale: "en_ZW",

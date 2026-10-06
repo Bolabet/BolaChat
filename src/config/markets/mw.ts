@@ -1,7 +1,9 @@
 import type { MarketConfig } from "@/types/market";
 
 /**
- * Malawi - planned rollout market.
+ * Malawi - not live yet. `comingSoon` makes /mw render the coming-soon
+ * landing page. Remove the `comingSoon` line (and add a real WhatsApp number
+ * and, if applicable, a `telegram` block) to launch the full site.
  * NOTE: domain, WhatsApp number, and legal links below are structurally
  * correct placeholders (right country code, right shape) and are flagged
  * TODO. Swap them for the real values before this route goes live.
@@ -13,19 +15,16 @@ export const mw: MarketConfig = {
   currencySymbol: "MK",
   locale: "en-MW",
 
+  comingSoon: {
+    // TODO: add a waitlist / sign-up link here to show a "Notify me" button.
+    // notifyUrl: "https://...",
+  },
+
   whatsapp: {
     // TODO: replace with the live BolaChat WhatsApp Business number for Malawi.
     numberE164: "265990000000",
     defaultMessage: "Hi BolaChat! I'd like to see today's odds.",
     powerPlaysMessage: "Hi BolaChat! Show me this week's PowerPlays.",
-  },
-
-  // TODO: confirm the production Bolabet Malawi domain.
-  telegram: {
-    // TODO: replace with the live BolaChat Telegram bot username for this market.
-    username: "bolachat_mw_bot",
-    defaultStart: "web",
-    powerPlaysStart: "powerplays",
   },
 
   registrationUrl: "https://www.bolabet.co.mw/register",
@@ -68,9 +67,9 @@ export const mw: MarketConfig = {
   sports: ["soccer", "basketball", "boxing"],
 
   seo: {
-    title: "BolaChat Malawi - Sports stats, answers & plays, right inside WhatsApp & Telegram",
+    title: "BolaChat is coming to Malawi - Your AI sports bookie",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Coming soon to Malawi.",
+      "BolaChat is your AI sports bookie, right inside your chat app - live stats, real odds and plays with no downloads. Coming soon to Malawi.",
     canonicalUrl: "https://bolachat.io/mw",
     ogImage: "/images/og/bolachat-mw.jpg",
     ogLocale: "en_MW",

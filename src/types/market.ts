@@ -87,7 +87,18 @@ export interface MarketConfig {
   locale: string;
 
   whatsapp: WhatsAppConfig;
-  telegram: TelegramConfig;
+  /** Leave undefined for markets where BolaChat is not on Telegram (e.g. Zambia). */
+  telegram?: TelegramConfig;
+
+  /**
+   * Set for markets that are not live yet. The market route then renders the
+   * "coming soon" landing page instead of the full site, and no chat buttons
+   * are shown.
+   */
+  comingSoon?: {
+    /** Optional sign-up / waitlist link. When set, a "Notify me" button appears. */
+    notifyUrl?: string;
+  };
 
   registrationUrl: string;
   loginUrl: string;

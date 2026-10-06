@@ -7,7 +7,7 @@ import { BolaWordmark } from "@/components/ui/BolaWordmark";
 export const metadata: Metadata = {
   title: "BolaChat - choose your country",
   description:
-    "BolaChat is live in Zambia, with Zimbabwe and Malawi coming soon. Choose your country to get started.",
+    "BolaChat is live in Zambia and Zimbabwe, with Malawi coming soon. Choose your country to get started.",
 };
 
 /**
@@ -26,7 +26,7 @@ export default function RootPage() {
           Choose your country
         </h1>
         <p className="mt-3 text-sm text-muted">
-          Sports stats, answers &amp; plays, right inside WhatsApp &amp; Telegram.
+          Sports stats, answers &amp; plays, right inside your chat app.
         </p>
 
         <div className="mt-8 flex flex-col gap-3">

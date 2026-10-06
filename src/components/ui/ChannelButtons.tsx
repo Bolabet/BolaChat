@@ -23,7 +23,7 @@ interface ChannelButtonsProps {
 }
 
 /**
- * The WhatsApp + Telegram CTA pair. Every "start chatting" button on the
+ * The WhatsApp (+ Telegram, where the market has it) CTA group. Every "start chatting" button on the
  * site goes through here, so adding a channel later is a one-file change.
  */
 export function ChannelButtons({
@@ -37,10 +37,11 @@ export function ChannelButtons({
     intent === "powerPlays"
       ? getPowerPlaysWhatsAppUrl(market.whatsapp)
       : getDefaultWhatsAppUrl(market.whatsapp);
-  const telegramUrl =
-    intent === "powerPlays"
+  const telegramUrl = market.telegram
+    ? intent === "powerPlays"
       ? getPowerPlaysTelegramUrl(market.telegram)
-      : getDefaultTelegramUrl(market.telegram);
+      : getDefaultTelegramUrl(market.telegram)
+    : null;
 
   return (
     <div className={cx("flex flex-col gap-3 sm:flex-row sm:flex-wrap", className)}>
@@ -52,14 +53,16 @@ export function ChannelButtons({
       >
         {label} on WhatsApp
       </Button>
-      <Button
-        href={telegramUrl}
-        variant="telegram"
-        size={size}
-        icon={<TelegramIcon className="h-5 w-5" />}
-      >
-        {label} on Telegram
-      </Button>
+      {telegramUrl && (
+        <Button
+          href={telegramUrl}
+          variant="telegram"
+          size={size}
+          icon={<TelegramIcon className="h-5 w-5" />}
+        >
+          {label} on Telegram
+        </Button>
+      )}
     </div>
   );
 }
