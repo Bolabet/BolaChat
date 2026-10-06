@@ -6,11 +6,11 @@ import "@/styles/globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://bolachat.io"),
   title: {
-    default: "BolaChat - Sports stats, answers & plays, right inside WhatsApp",
+    default: "BolaChat - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     template: "%s",
   },
   description:
-    "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins.",
+    "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins.",
 };
 
 export default function RootLayout({

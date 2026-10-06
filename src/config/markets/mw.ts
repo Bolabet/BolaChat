@@ -21,15 +21,22 @@ export const mw: MarketConfig = {
   },
 
   // TODO: confirm the production Bolabet Malawi domain.
+  telegram: {
+    // TODO: replace with the live BolaChat Telegram bot username for this market.
+    username: "bolachat_mw_bot",
+    defaultStart: "web",
+    powerPlaysStart: "powerplays",
+  },
+
   registrationUrl: "https://www.bolabet.co.mw/register",
   loginUrl: "https://www.bolabet.co.mw/login",
   depositUrl: "https://www.bolabet.co.mw/deposit",
 
   ctaLabels: {
-    primary: "Start chatting on WhatsApp",
+    primary: "Chat",
     secondary: "See how it works",
-    powerPlays: "See this week's PowerPlays",
-    finalCta: "Start chatting on WhatsApp",
+    powerPlays: "Get PowerPlays",
+    finalCta: "Chat",
   },
 
   legal: {
@@ -61,9 +68,9 @@ export const mw: MarketConfig = {
   sports: ["soccer", "basketball", "boxing"],
 
   seo: {
-    title: "BolaChat Malawi - Sports stats, answers & plays, right inside WhatsApp",
+    title: "BolaChat Malawi - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins. Coming soon to Malawi.",
+      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Coming soon to Malawi.",
     canonicalUrl: "https://bolachat.io/mw",
     ogImage: "/images/og/bolachat-mw.jpg",
     ogLocale: "en_MW",

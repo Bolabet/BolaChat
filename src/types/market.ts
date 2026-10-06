@@ -42,6 +42,15 @@ export interface WhatsAppConfig {
   powerPlaysMessage: string;
 }
 
+export interface TelegramConfig {
+  /** Bot username without the leading "@" (e.g. "bolachat_zm_bot"). */
+  username: string;
+  /** Start payload for the generic "chat" CTAs. Letters, digits, "_" and "-" only. */
+  defaultStart: string;
+  /** Start payload for the PowerPlays CTA. Letters, digits, "_" and "-" only. */
+  powerPlaysStart: string;
+}
+
 export interface LegalLinks {
   termsUrl: string;
   privacyUrl: string;
@@ -78,11 +87,16 @@ export interface MarketConfig {
   locale: string;
 
   whatsapp: WhatsAppConfig;
+  telegram: TelegramConfig;
 
   registrationUrl: string;
   loginUrl: string;
   depositUrl: string;
 
+  /**
+   * Button copy. `primary`, `powerPlays` and `finalCta` are verb phrases;
+   * the channel is appended per button ("Chat on WhatsApp", "Chat on Telegram").
+   */
   ctaLabels: {
     primary: string;
     secondary: string;

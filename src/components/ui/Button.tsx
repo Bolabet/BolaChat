@@ -1,7 +1,7 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cx } from "@/lib/utils";
 
-type ButtonVariant = "whatsapp" | "primary" | "secondary" | "ghost";
+type ButtonVariant = "whatsapp" | "telegram" | "primary" | "secondary" | "ghost";
 type ButtonSize = "md" | "lg";
 
 interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -13,15 +13,18 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 /**
- * "whatsapp" is the ONLY variant that uses WhatsApp's own green - reserved
- * for buttons that open a wa.me link, so the CTA still reads as "opens
- * WhatsApp" at a glance. Every other CTA on the site follows the CI
+ * "whatsapp" and "telegram" are the ONLY variants that use a third-party
+ * brand colour (WhatsApp green, Telegram blue) - reserved for buttons that
+ * open a wa.me / t.me link, so the CTA still reads as "opens WhatsApp" or
+ * "opens Telegram" at a glance. Every other CTA on the site follows the CI
  * (5.1 Website UI Styling Guidelines): Action Yellow on Pitch Black for
  * primary actions, Chalk White outline for secondary ones.
  */
 const variantClasses: Record<ButtonVariant, string> = {
   whatsapp:
     "bg-whatsapp text-white hover:bg-whatsapp-strong active:bg-whatsapp-strong",
+  telegram:
+    "bg-telegram text-white hover:bg-telegram-strong active:bg-telegram-strong",
   primary:
     "bg-accent text-accent-foreground hover:brightness-95 active:brightness-90",
   secondary:
@@ -43,7 +46,7 @@ export function Button({
   className,
   ...rest
 }: ButtonProps) {
-  const isExternal = href.startsWith("http") || href.startsWith("https://wa.me");
+  const isExternal = href.startsWith("http");
 
   return (
     <a

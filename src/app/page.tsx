@@ -26,7 +26,7 @@ export default function RootPage() {
           Choose your country
         </h1>
         <p className="mt-3 text-sm text-muted">
-          Sports stats, answers &amp; plays, right inside WhatsApp.
+          Sports stats, answers &amp; plays, right inside WhatsApp &amp; Telegram.
         </p>
 
         <div className="mt-8 flex flex-col gap-3">

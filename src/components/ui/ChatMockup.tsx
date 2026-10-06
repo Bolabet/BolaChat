@@ -1,5 +1,3 @@
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-
 interface ChatLine {
   from: "user" | "bot";
   text: string;
@@ -26,7 +24,9 @@ export function ChatMockup() {
     <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-background-elevated shadow-2xl shadow-black/40">
       <div className="flex items-center gap-3 border-b border-border bg-background-elevated-2 px-4 py-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
-          <WhatsAppIcon className="h-4.5 w-4.5" />
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-4.5 w-4.5">
+            <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+          </svg>
         </div>
         <div>
           <p className="text-sm font-semibold">BolaChat</p>

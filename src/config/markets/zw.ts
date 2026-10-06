@@ -23,15 +23,22 @@ export const zw: MarketConfig = {
   },
 
   // TODO: confirm the production Bolabet Zimbabwe domain.
+  telegram: {
+    // TODO: replace with the live BolaChat Telegram bot username for this market.
+    username: "bolachat_zw_bot",
+    defaultStart: "web",
+    powerPlaysStart: "powerplays",
+  },
+
   registrationUrl: "https://www.bolabet.co.zw/register",
   loginUrl: "https://www.bolabet.co.zw/login",
   depositUrl: "https://www.bolabet.co.zw/deposit",
 
   ctaLabels: {
-    primary: "Start chatting on WhatsApp",
+    primary: "Chat",
     secondary: "See how it works",
-    powerPlays: "See this week's PowerPlays",
-    finalCta: "Start chatting on WhatsApp",
+    powerPlays: "Get PowerPlays",
+    finalCta: "Chat",
   },
 
   legal: {
@@ -63,9 +70,9 @@ export const zw: MarketConfig = {
   sports: ["soccer", "cricket", "rugby"],
 
   seo: {
-    title: "BolaChat Zimbabwe - Sports stats, answers & plays, right inside WhatsApp",
+    title: "BolaChat Zimbabwe - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins. Coming soon to Zimbabwe.",
+      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Coming soon to Zimbabwe.",
     canonicalUrl: "https://bolachat.io/zw",
     ogImage: "/images/og/bolachat-zw.jpg",
     ogLocale: "en_ZW",

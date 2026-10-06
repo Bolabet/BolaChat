@@ -1,13 +1,11 @@
 import Image from "next/image";
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
+import { ChannelButtons } from "@/components/ui/ChannelButtons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BolaSlash } from "@/components/ui/BolaSlash";
-import { getPowerPlaysWhatsAppUrl } from "@/lib/whatsapp";
 
 export function PowerPlays({ market }: { market: MarketConfig }) {
-  const whatsAppUrl = getPowerPlaysWhatsAppUrl(market.whatsapp);
   const example = market.copy.powerPlayExample;
 
   return (
@@ -44,11 +42,13 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           />
 
           <div className="mt-6 flex flex-col items-start gap-2">
-            <Button href={whatsAppUrl} variant="whatsapp" size="lg">
-              {market.ctaLabels.powerPlays}
-            </Button>
+            <ChannelButtons
+              market={market}
+              label={market.ctaLabels.powerPlays}
+              intent="powerPlays"
+            />
             <p className="text-xs text-muted">
-              Opens WhatsApp with your question prefilled.
+              Opens WhatsApp or Telegram, ready to chat.
             </p>
             <a
               href={market.legal.powerPlaysTermsUrl}

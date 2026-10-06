@@ -13,7 +13,7 @@ export function Footer({ market }: { market: MarketConfig }) {
           <div>
             <BolaWordmark className="text-lg" />
             <p className="mt-2 max-w-xs text-sm text-muted">
-              Your sports copilot in WhatsApp - {market.countryName}.
+              Your sports copilot in WhatsApp and Telegram - {market.countryName}.
             </p>
           </div>
 

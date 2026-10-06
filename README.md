@@ -18,11 +18,13 @@ parent brand's CI, applied here to the BolaChat sub-brand):
   `#F5E500` as the single accent, Chalk White `#FFFFFF` text. This is the
   CI's "Home Kit" (3.3) - the black/yellow combination specified for core
   sports betting product UI.
-- **One deliberate exception**: WhatsApp CTA buttons use WhatsApp's own
-  green (`--whatsapp` in `globals.css`), not Action Yellow, so they still
-  read as "this opens WhatsApp" at a glance. Every other accent on the site
-  - links, badges, focus states, the wordmark split - is Action Yellow. See
-  `Button.tsx`: the `whatsapp` variant is reserved for wa.me links only.
+- **Two deliberate exceptions**: WhatsApp CTA buttons use WhatsApp's own
+  green (`--whatsapp`) and Telegram CTA buttons use Telegram's blue
+  (`--telegram`), both in `globals.css`, so they still read as "this opens
+  WhatsApp / Telegram" at a glance. Every other accent on the site - links,
+  badges, focus states, the wordmark split - is Action Yellow. See
+  `Button.tsx`: the `whatsapp` and `telegram` variants are reserved for
+  wa.me / t.me links only.
 - **Typography** (CI 2.1/2.2): Archivo (weight 900, italic, uppercase, tight
   tracking) for headlines via the `.font-heading` utility class; Inter for
   body/UI text, with tabular lining numerals turned on site-wide
@@ -78,12 +80,13 @@ src/
   components/
     MarketPage.tsx      The one page template every market route renders
     layout/             Header, Footer
-    sections/           Hero, PowerPlays, HowItWorks, WhyWhatsApp, SportsGrid, FinalCta
-    ui/                 Button, Container, Badge, SectionHeading, SportArt, ChatMockup, WhatsAppIcon
+    sections/           Hero, PowerPlays, HowItWorks, WhyMessaging, SportsGrid, FinalCta
+    ui/                 Button, ChannelButtons, Container, Badge, SectionHeading, SportArt, ChatMockup, WhatsAppIcon, TelegramIcon
   config/
     markets/            zm.ts / mw.ts / zw.ts / index.ts - see "Market configuration" below
   lib/
     whatsapp.ts         wa.me URL builder (single source of truth for WhatsApp links)
+    telegram.ts         t.me URL builder (single source of truth for Telegram links)
     utils.ts            cx() class-name helper
   types/
     market.ts           MarketConfig contract every market file must satisfy
@@ -102,7 +105,7 @@ codebase instead of three separate sites.
 ## Market configuration
 
 Each market is one file in `src/config/markets/` implementing the
-`MarketConfig` type (`src/types/market.ts`): currency, WhatsApp number,
+`MarketConfig` type (`src/types/market.ts`): currency, WhatsApp number, Telegram bot username,
 registration/login/deposit URLs, legal links, support details, SEO
 metadata, and analytics IDs (left empty until you're ready to enable them).
 
@@ -111,9 +114,9 @@ marked `// TODO` in its config file:
 
 | Market | What's a placeholder |
 |---|---|
-| Zambia (`zm.ts`) | WhatsApp Business number, helpline contact |
-| Malawi (`mw.ts`) | Domain (`bolabet.co.mw`), WhatsApp number, all legal URLs, helpline |
-| Zimbabwe (`zw.ts`) | Domain (`bolabet.co.zw`), currency (USD vs ZiG - confirm with the business), WhatsApp number, all legal URLs, helpline |
+| Zambia (`zm.ts`) | WhatsApp Business number, Telegram bot username, helpline contact |
+| Malawi (`mw.ts`) | Domain (`bolabet.co.mw`), WhatsApp number, Telegram bot username, all legal URLs, helpline |
+| Zimbabwe (`zw.ts`) | Domain (`bolabet.co.zw`), currency (USD vs ZiG - confirm with the business), WhatsApp number, Telegram bot username, all legal URLs, helpline |
 
 Zambia's domain (`bolabet.co.zm`) and currency (Kwacha, symbol `K`) are
 carried over from the live site's own copy, so those aren't placeholders.

@@ -18,15 +18,22 @@ export const zm: MarketConfig = {
     powerPlaysMessage: "Hi BolaChat! Show me this week's PowerPlays.",
   },
 
+  telegram: {
+    // TODO: replace with the live BolaChat Telegram bot username for this market.
+    username: "bolachat_zm_bot",
+    defaultStart: "web",
+    powerPlaysStart: "powerplays",
+  },
+
   registrationUrl: "https://www.bolabet.co.zm/register",
   loginUrl: "https://www.bolabet.co.zm/login",
   depositUrl: "https://www.bolabet.co.zm/deposit",
 
   ctaLabels: {
-    primary: "Start chatting on WhatsApp",
+    primary: "Chat",
     secondary: "See how it works",
-    powerPlays: "See this week's PowerPlays",
-    finalCta: "Start chatting on WhatsApp",
+    powerPlays: "Get PowerPlays",
+    finalCta: "Chat",
   },
 
   legal: {
@@ -58,9 +65,9 @@ export const zm: MarketConfig = {
   sports: ["soccer", "basketball", "boxing"],
 
   seo: {
-    title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp",
+    title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     description:
-      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins. Available in Zambia.",
+      "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Available in Zambia.",
     canonicalUrl: "https://bolachat.io/zm",
     ogImage: "/images/og/bolachat-zm.jpg",
     ogLocale: "en_ZM",

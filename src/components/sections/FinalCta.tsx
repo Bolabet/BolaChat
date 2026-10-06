@@ -1,12 +1,8 @@
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-import { getDefaultWhatsAppUrl } from "@/lib/whatsapp";
+import { ChannelButtons } from "@/components/ui/ChannelButtons";
 
 export function FinalCta({ market }: { market: MarketConfig }) {
-  const whatsAppUrl = getDefaultWhatsAppUrl(market.whatsapp);
-
   return (
     <section className="border-t border-border py-16 sm:py-24">
       <Container className="text-center">
@@ -17,18 +13,11 @@ export function FinalCta({ market }: { market: MarketConfig }) {
           Prove <span className="text-accent">you</span> know the game.
         </p>
         <p className="mx-auto mt-4 max-w-md text-base text-muted">
-          Open WhatsApp, say hi to BolaChat, and ask your first question.
+          Open WhatsApp or Telegram, say hi to BolaChat, and ask your first question.
           It&apos;s that simple.
         </p>
         <div className="mt-8 flex justify-center">
-          <Button
-            href={whatsAppUrl}
-            variant="whatsapp"
-            size="lg"
-            icon={<WhatsAppIcon className="h-5 w-5" />}
-          >
-            {market.ctaLabels.finalCta}
-          </Button>
+          <ChannelButtons market={market} label={market.ctaLabels.finalCta} />
         </div>
       </Container>
     </section>

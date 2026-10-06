@@ -1,15 +1,12 @@
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { ChannelButtons } from "@/components/ui/ChannelButtons";
 import { Badge } from "@/components/ui/Badge";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import Image from "next/image";
 import { BolaSlash } from "@/components/ui/BolaSlash";
-import { getDefaultWhatsAppUrl } from "@/lib/whatsapp";
 
 export function Hero({ market }: { market: MarketConfig }) {
-  const whatsAppUrl = getDefaultWhatsAppUrl(market.whatsapp);
-
   return (
     <section className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24">
       <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -19,7 +16,7 @@ export function Hero({ market }: { market: MarketConfig }) {
           </p>
           <h1 className="font-heading text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
             Stats, answers &amp; plays -{" "}
-            <span className="text-accent">all in WhatsApp.</span>
+            <span className="text-accent">all in your chat.</span>
           </h1>
 
           {/* CI 2.3: the slogan lockup - "YOU" always emphasised in Action Yellow. */}
@@ -29,21 +26,16 @@ export function Hero({ market }: { market: MarketConfig }) {
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
             Ask anything about your teams and matches, get the real numbers,
-            and place your play. No new app. Right where you already chat.
+            and place your play. No new app. Right inside WhatsApp and Telegram.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button
-              href={whatsAppUrl}
-              variant="whatsapp"
-              size="lg"
-              icon={<WhatsAppIcon className="h-5 w-5" />}
-            >
-              {market.ctaLabels.primary}
-            </Button>
-            <Button href="#how" variant="secondary" size="lg">
-              {market.ctaLabels.secondary}
-            </Button>
+          <div className="mt-8 flex flex-col gap-3">
+            <ChannelButtons market={market} label={market.ctaLabels.primary} />
+            <div>
+              <Button href="#how" variant="secondary" size="lg">
+                {market.ctaLabels.secondary}
+              </Button>
+            </div>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -61,7 +53,7 @@ export function Hero({ market }: { market: MarketConfig }) {
           <BolaSlash className="absolute -inset-x-4 top-6 h-10 opacity-90 sm:h-14" />
           <Image
             src="/images/sports/epl.jpg"
-            alt="BolaChat - sports betting inside WhatsApp"
+            alt="BolaChat - sports betting inside WhatsApp and Telegram"
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"

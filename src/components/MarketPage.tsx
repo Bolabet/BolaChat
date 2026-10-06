@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { PowerPlays } from "@/components/sections/PowerPlays";
 import { HowItWorks } from "@/components/sections/HowItWorks";
-import { WhyWhatsApp } from "@/components/sections/WhyWhatsApp";
+import { WhyMessaging } from "@/components/sections/WhyMessaging";
 import { SportsGrid } from "@/components/sections/SportsGrid";
 import { FinalCta } from "@/components/sections/FinalCta";
 
@@ -21,7 +21,7 @@ export function MarketPage({ market }: { market: MarketConfig }) {
         <Hero market={market} />
         <PowerPlays market={market} />
         <HowItWorks />
-        <WhyWhatsApp />
+        <WhyMessaging />
         <SportsGrid market={market} />
         <FinalCta market={market} />
       </main>

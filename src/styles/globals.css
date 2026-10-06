@@ -8,7 +8,7 @@
  * betting product, so it's the default theme here.
  *
  * WhatsApp green is deliberately NOT part of this palette: per explicit
- * direction, only the WhatsApp CTA buttons use WhatsApp's own green so they
+ * direction, only the WhatsApp and Telegram CTA buttons use their own brand colours so they
  * read as "opens WhatsApp" - every other accent in the UI is Action Yellow.
  */
 :root {
@@ -25,6 +25,9 @@
   /* WhatsApp brand green - reserved exclusively for WhatsApp CTAs */
   --whatsapp: #25d366;
   --whatsapp-strong: #1fb356;
+  /* Telegram brand blue - reserved exclusively for Telegram CTAs */
+  --telegram: #229ed9;
+  --telegram-strong: #1b86b8;
 
   --background: var(--color-pitch-black);
   --background-elevated: #2a2a2a; /* CI-specified card border/surface grey */
@@ -63,6 +66,8 @@
   --color-heritage: var(--heritage);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-strong: var(--whatsapp-strong);
+  --color-telegram: var(--telegram);
+  --color-telegram-strong: var(--telegram-strong);
 
   /* CI 2.1/2.2: Archivo Black Italic for headlines ("the shout"), Inter for
      body/UI copy and, crucially, tabular odds display. */
