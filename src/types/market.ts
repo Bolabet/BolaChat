@@ -8,6 +8,8 @@
  * component - add it here instead and read it from the active config.
  */
 
+import type { SportKey } from "@/config/sports";
+
 export type MarketCode = "zm" | "mw" | "zw";
 
 export interface AnalyticsConfig {
@@ -91,6 +93,8 @@ export interface MarketConfig {
   legal: LegalLinks;
   support: SupportDetails;
   copy: MarketCopy;
+  /** Sports shown in the "Pick your sport" grid, in display order. */
+  sports: SportKey[];
   seo: SeoConfig;
   analytics: AnalyticsConfig;
 }

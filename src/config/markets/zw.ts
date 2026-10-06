@@ -60,6 +60,8 @@ export const zw: MarketConfig = {
     },
   },
 
+  sports: ["soccer", "cricket", "rugby"],
+
   seo: {
     title: "BolaChat Zimbabwe - Sports stats, answers & plays, right inside WhatsApp",
     description:

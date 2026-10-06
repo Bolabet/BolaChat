@@ -58,6 +58,8 @@ export const mw: MarketConfig = {
     },
   },
 
+  sports: ["soccer", "basketball", "boxing"],
+
   seo: {
     title: "BolaChat Malawi - Sports stats, answers & plays, right inside WhatsApp",
     description:

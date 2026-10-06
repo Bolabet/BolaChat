@@ -55,6 +55,8 @@ export const zm: MarketConfig = {
     },
   },
 
+  sports: ["soccer", "basketball", "boxing"],
+
   seo: {
     title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp",
     description:

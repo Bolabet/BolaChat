@@ -22,7 +22,7 @@ export function MarketPage({ market }: { market: MarketConfig }) {
         <PowerPlays market={market} />
         <HowItWorks />
         <WhyWhatsApp />
-        <SportsGrid />
+        <SportsGrid market={market} />
         <FinalCta market={market} />
       </main>
       <Footer market={market} />

@@ -1,26 +1,13 @@
 import Image from "next/image";
+import type { MarketConfig } from "@/types/market";
+import { sportsCatalog } from "@/config/sports";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SportArt } from "@/components/ui/SportArt";
 
-const sports = [
-  {
-    image: "/images/sports/soccer.jpg",
-    name: "Soccer",
-    body: "Leagues and cups worldwide. Form, lineups, match odds.",
-  },
-  {
-    image: "/images/sports/cricket.jpg",
-    name: "Cricket",
-    body: "Every format, every series. Averages, form and live lines.",
-  },
-  {
-    image: "/images/sports/rugby.jpg",
-    name: "Rugby",
-    body: "Union and league. Team news, head-to-heads and the odds before kick-off.",
-  },
-];
+export function SportsGrid({ market }: { market: MarketConfig }) {
+  const sports = market.sports.map((key) => sportsCatalog[key]);
 
-export function SportsGrid() {
   return (
     <section id="sports" className="scroll-mt-20 py-16 sm:py-24">
       <Container>
@@ -37,15 +24,23 @@ export function SportsGrid() {
               key={sport.name}
               className="overflow-hidden rounded-md border border-border bg-background-elevated"
             >
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src={sport.image}
-                  alt={`${sport.name} on BolaChat`}
-                  fill
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                  className="object-cover"
+              {sport.image ? (
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={sport.image}
+                    alt={`${sport.name} on BolaChat`}
+                    fill
+                    sizes="(min-width: 640px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <SportArt
+                  variant={sport.art}
+                  label={`${sport.name} on BolaChat`}
+                  className="aspect-[4/3] w-full"
                 />
-              </div>
+              )}
               <div className="p-5">
                 <p className="font-heading text-base normal-case">{sport.name}</p>
                 <p className="mt-1 text-sm leading-relaxed text-muted">
