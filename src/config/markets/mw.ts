@@ -1,4 +1,5 @@
 import type { MarketConfig } from "@/types/market";
+import { marketUrl } from "@/config/site";
 
 /**
  * Malawi - not live yet. `comingSoon` makes /mw render the coming-soon
@@ -70,7 +71,7 @@ export const mw: MarketConfig = {
     title: "BolaChat is coming to Malawi - Your AI sports bookie",
     description:
       "BolaChat is your AI sports bookie, right inside your chat app - live stats, real odds and plays with no downloads. Coming soon to Malawi.",
-    canonicalUrl: "https://bolachat.io/mw",
+    canonicalUrl: marketUrl("mw"),
     ogImage: "/images/og/bolachat-mw.jpg",
     ogLocale: "en_MW",
   },

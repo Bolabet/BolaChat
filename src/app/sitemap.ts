@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { markets, marketCodes } from "@/config/markets";
+import { siteUrl } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const marketEntries: MetadataRoute.Sitemap = marketCodes.map((code) => ({
@@ -11,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: "https://bolachat.io",
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,

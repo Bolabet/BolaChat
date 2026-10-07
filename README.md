@@ -1,6 +1,6 @@
 # BolaChat
 
-A rebuild of the BolaChat marketing site (https://bolachat.io) - the WhatsApp-native
+A rebuild of the BolaChat marketing site (https://bolachat.africa) - the WhatsApp-native
 AI sports betting product from Bola Group / Bolabet, live in Zambia with
 Zimbabwe and Malawi planned. This repo replaces the original one-off page
 with a maintainable, multi-market Next.js app.
@@ -142,6 +142,23 @@ carried over from the live site's own copy, so those aren't placeholders.
 That's it. `sitemap.ts` and the root "choose your country" page both read
 from the registry automatically, so they pick up the new market without
 any further changes.
+
+### Domain
+
+The site lives on `bolachat.africa` (set in `src/config/site.ts`). Each
+market is a path on that one domain:
+
+| Address | Shows |
+|---|---|
+| `bolachat.africa` | "Choose your country" page |
+| `bolachat.africa/zm` | Zambia |
+| `bolachat.africa/zw` | Zimbabwe |
+| `bolachat.africa/mw` | Malawi (coming soon page) |
+
+Canonical URLs and the sitemap use these addresses. Connecting the domain
+(Vercel): add `bolachat.africa` and `www.bolachat.africa` under Project ->
+Settings -> Domains, then create the DNS records Vercel shows at the DNS
+provider. No per-market domain setup is needed.
 
 ### Editing market configuration
 

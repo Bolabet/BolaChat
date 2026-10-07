@@ -1,4 +1,5 @@
 import type { MarketConfig } from "@/types/market";
+import { marketUrl } from "@/config/site";
 
 /**
  * Zimbabwe - live on WhatsApp and Telegram.
@@ -71,7 +72,7 @@ export const zw: MarketConfig = {
     title: "BolaChat Zimbabwe - Sports stats, answers & plays, right inside WhatsApp & Telegram",
     description:
       "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp or Telegram. No app, no logins. Available in Zimbabwe.",
-    canonicalUrl: "https://bolachat.io/zw",
+    canonicalUrl: marketUrl("zw"),
     ogImage: "/images/og/bolachat-zw.jpg",
     ogLocale: "en_ZW",
   },

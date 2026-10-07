@@ -1,4 +1,5 @@
 import type { MarketConfig } from "@/types/market";
+import { marketUrl } from "@/config/site";
 
 /**
  * Zambia is BolaChat's live, first market.
@@ -60,7 +61,7 @@ export const zm: MarketConfig = {
     title: "BolaChat Zambia - Sports stats, answers & plays, right inside WhatsApp",
     description:
       "Ask BolaChat about your teams and matches, get live odds and stats, and place your play - all inside WhatsApp. No app, no logins. Available in Zambia.",
-    canonicalUrl: "https://bolachat.io/zm",
+    canonicalUrl: marketUrl("zm"),
     ogImage: "/images/og/bolachat-zm.jpg",
     ogLocale: "en_ZM",
   },

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import "@fontsource-variable/archivo/wght-italic.css";
 import "@fontsource-variable/inter/wght.css";
 import "@/styles/globals.css";
+import { siteUrl } from "@/config/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bolachat.io"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "BolaChat - Sports stats, answers & plays, right inside your chat app",
     template: "%s",
