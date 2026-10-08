@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { BolaWordmark } from "@/components/ui/BolaWordmark";
+import { BolaChatByBolabet } from "@/components/ui/BolabetMark";
 import { BolaSlash } from "@/components/ui/BolaSlash";
 import { ChatMockup } from "@/components/ui/ChatMockup";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -48,14 +48,14 @@ export function ComingSoonPage({ market }: { market: MarketConfig }) {
     <>
       <header className="absolute inset-x-0 top-0 z-20">
         <Container className="flex h-16 items-center justify-between sm:h-20">
-          <Link href="/" aria-label="BolaChat home">
-            <BolaWordmark className="text-lg sm:text-xl" />
+          <Link href="/" aria-label="BolaChat by Bolabet - home">
+            <BolaChatByBolabet />
           </Link>
 
           {liveMarkets.length > 0 && (
             <nav
               aria-label="Live countries"
-              className="flex items-center gap-4 text-sm font-medium sm:gap-6"
+              className="hidden items-center gap-4 text-sm font-medium sm:flex sm:gap-6"
             >
               <span className="hidden text-muted sm:inline">Live in</span>
               {liveMarkets.map((m) => (

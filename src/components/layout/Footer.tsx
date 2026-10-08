@@ -1,6 +1,7 @@
 import type { MarketConfig } from "@/types/market";
 import { Container } from "@/components/ui/Container";
 import { BolaWordmark } from "@/components/ui/BolaWordmark";
+import { BolabetProductLine } from "@/components/ui/BolabetMark";
 import { ResponsibleGamingBadge } from "@/components/ui/ResponsibleGamingBadge";
 import { channelNames } from "@/lib/channels";
 
@@ -67,6 +68,7 @@ export function Footer({ market }: { market: MarketConfig }) {
           <p className="mt-2 max-w-sm text-sm text-muted">
             Your AI sports bookie - coming soon to {market.countryName}.
           </p>
+          <BolabetProductLine className="mt-5" />
 
           <hr className="my-8 border-border" />
 
@@ -102,6 +104,7 @@ export function Footer({ market }: { market: MarketConfig }) {
             <p className="mt-2 max-w-xs text-sm text-muted">
               Your sports copilot in {channelNames(market)} - {market.countryName}.
             </p>
+            <BolabetProductLine className="mt-5" />
           </div>
 
           <nav aria-label="Legal" className="flex flex-col gap-2 text-sm">
