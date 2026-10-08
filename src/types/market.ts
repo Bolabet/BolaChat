@@ -58,9 +58,18 @@ export interface LegalLinks {
   powerPlaysTermsUrl: string;
 }
 
+/** One customer-care line group, e.g. a mobile network and its numbers. */
+export interface SupportLineGroup {
+  /** Group heading, e.g. "Airtel" or "Customer Care". */
+  label: string;
+  /** Numbers exactly as they should be displayed. */
+  numbers: string[];
+}
+
 export interface SupportDetails {
   email: string;
-  phoneDisplay: string;
+  /** Customer-care numbers, grouped by network (shown as tappable tel: links). */
+  lines: SupportLineGroup[];
   /** Name of the national/local problem-gambling helpline shown in the footer. */
   helplineName: string;
   helplineContact: string;
