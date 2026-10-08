@@ -49,7 +49,11 @@ export const zw: MarketConfig = {
 
   support: {
     email: "support@bolabet.co.zw",
-    phoneDisplay: "+263 77 000 0000",
+    lines: [
+      { label: "Econet", numbers: ["+263 771 631 228", "+263 771 632 383"] },
+      { label: "NetOne", numbers: ["+263 719 210 014", "+263 719 210 039"] },
+      { label: "Africom", numbers: ["+263 867 701 0220"] },
+    ],
     helplineName: "Zimbabwe Responsible Gambling Helpline",
     // TODO: confirm the current national/operator problem-gambling helpline contact.
     helplineContact: "0800 000 000",

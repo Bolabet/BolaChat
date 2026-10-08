@@ -38,7 +38,17 @@ export const zm: MarketConfig = {
 
   support: {
     email: "support@bolabet.co.zm",
-    phoneDisplay: "+260 97 000 0000",
+    lines: [
+      {
+        label: "Airtel",
+        numbers: ["+260 97 744 9933", "+260 77 055 2541", "+260 77 055 2543"],
+      },
+      {
+        label: "MTN",
+        numbers: ["+260 96 093 0022", "+260 76 243 7006", "+260 76 243 7475"],
+      },
+      { label: "Zamtel/MTN Toll Free", numbers: ["357"] },
+    ],
     helplineName: "Zambia Responsible Gambling Helpline",
     // TODO: confirm the current national/operator problem-gambling helpline contact.
     helplineContact: "0800 000 000",

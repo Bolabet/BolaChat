@@ -47,8 +47,14 @@ export const mw: MarketConfig = {
   },
 
   support: {
-    email: "support@bolabet.co.mw",
-    phoneDisplay: "+265 99 000 0000",
+    email: "support@bolabet.mw",
+    lines: [
+      { label: "TNM", numbers: ["+265 899710910"] },
+      {
+        label: "Customer Care",
+        numbers: ["+265 984937219", "+265 887051279"],
+      },
+    ],
     helplineName: "Malawi Responsible Gambling Helpline",
     // TODO: confirm the current national/operator problem-gambling helpline contact.
     helplineContact: "0800 000 000",

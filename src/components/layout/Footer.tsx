@@ -4,12 +4,61 @@ import { BolaWordmark } from "@/components/ui/BolaWordmark";
 import { ResponsibleGamingBadge } from "@/components/ui/ResponsibleGamingBadge";
 import { channelNames } from "@/lib/channels";
 
+/** "tel:" link target from a display number ("+260 97 744 9933" -> "+260977449933"). */
+function telHref(display: string): string {
+  return `tel:${display.replace(/[^\d+]/g, "")}`;
+}
+
+function SupportBlock({ market }: { market: MarketConfig }) {
+  const { lines, email } = market.support;
+  return (
+    <section aria-labelledby="support-heading">
+      <h2
+        id="support-heading"
+        className="font-heading text-base normal-case text-foreground"
+      >
+        Help line / Customer support
+      </h2>
+
+      <div className="mt-4 grid gap-x-10 gap-y-5 text-sm text-muted sm:grid-cols-2 lg:grid-cols-3">
+        {lines.map((group) => (
+          <div key={group.label}>
+            <p className="font-semibold text-foreground">{group.label}</p>
+            <ul className="mt-1.5 space-y-1">
+              {group.numbers.map((number) => (
+                <li key={number}>
+                  <a
+                    href={telHref(number)}
+                    className="transition-colors hover:text-accent"
+                  >
+                    {number}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-5 text-sm text-muted">
+        Email:{" "}
+        <a
+          href={`mailto:${email}`}
+          className="text-foreground transition-colors hover:text-accent"
+        >
+          {email}
+        </a>
+      </p>
+    </section>
+  );
+}
+
 export function Footer({ market }: { market: MarketConfig }) {
   const year = new Date().getFullYear();
 
-  // Coming-soon markets: legal links, support details and the helpline are
-  // still placeholders, so keep the footer to the brand line, the 18+ badge
-  // and a generic responsible-gambling message.
+  // Coming-soon markets: the legal links and the responsible-gambling
+  // helpline are still placeholders, so keep those out. Customer-care lines
+  // are real, so they are shown.
   if (market.comingSoon) {
     return (
       <footer className="border-t border-border bg-background">
@@ -18,6 +67,10 @@ export function Footer({ market }: { market: MarketConfig }) {
           <p className="mt-2 max-w-sm text-sm text-muted">
             Your AI sports bookie - coming soon to {market.countryName}.
           </p>
+
+          <hr className="my-8 border-border" />
+
+          <SupportBlock market={market} />
 
           <hr className="my-8 border-border" />
 
@@ -77,13 +130,11 @@ export function Footer({ market }: { market: MarketConfig }) {
               Responsible gambling
             </a>
           </nav>
-
-          <div className="text-sm text-muted">
-            <p className="font-semibold text-foreground">Support</p>
-            <p className="mt-2">{market.support.phoneDisplay}</p>
-            <p>{market.support.email}</p>
-          </div>
         </div>
+
+        <hr className="my-8 border-border" />
+
+        <SupportBlock market={market} />
 
         <hr className="my-8 border-border" />
 
