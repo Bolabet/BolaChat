@@ -75,7 +75,26 @@ export interface SupportDetails {
   helplineContact: string;
 }
 
+/** A live PowerPlays promotion. Update weekly. */
+export interface PowerPlayPromo {
+  /** Promotion name, e.g. "Weekend Special". */
+  name: string;
+  /** One-line mechanic shown under the section title. */
+  mechanic: string;
+  /** The match every ticket must include, e.g. "Man. Utd vs Tottenham". */
+  fixture: string;
+  /** Kick-off, e.g. "Sat 10 Oct, 18:30". */
+  kickoff: string;
+  /** Key terms listed in the card, e.g. { label: "Min legs", value: "5" }. */
+  terms: { label: string; value: string }[];
+}
+
 export interface MarketCopy {
+  /**
+   * Live promotion. When set, the PowerPlays section shows it instead of
+   * the illustrative example below.
+   */
+  powerPlay?: PowerPlayPromo;
   /** Example fixture shown in the PowerPlays card. Illustrative only, never live odds. */
   powerPlayExample: {
     fixture: string;

@@ -60,6 +60,18 @@ export const zw: MarketConfig = {
   },
 
   copy: {
+    // Weekly promotion - update (or remove) each week.
+    powerPlay: {
+      name: "Weekend Special",
+      mechanic: "Bet $1 on a BolaChat combo and get $1 in freebets.",
+      fixture: "Man. Utd vs Tottenham",
+      kickoff: "Sat 10 Oct, 18:30",
+      terms: [
+        { label: "Stake", value: "$1" },
+        { label: "You get", value: "$1 in freebets" },
+        { label: "Min legs", value: "5" },
+      ],
+    },
     powerPlayExample: {
       fixture: "Arsenal vs Chelsea",
       kickoff: "Sat 8pm",
