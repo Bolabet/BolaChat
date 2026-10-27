@@ -5,7 +5,7 @@
  *
  * Only `id`, `title` and `kickoff` are required; every other block on the
  * card is shown only when it's filled in, so one shape covers both an
- * odds-boost pick ("Arsenal vs Chelsea, Home win 2.10, K50 -> 50% back") and
+ * odds-boost pick ("Arsenal vs Chelsea, odds 2.10, K50 -> 50% back") and
  * a promo like "Weekend Special: Bet $1 on a combo, get $1 in freebets".
  */
 
@@ -24,9 +24,7 @@ export interface PowerPlay {
   title: string;
   /** When it plays, exactly as it should be displayed, e.g. "Sat 8pm". */
   kickoff: string;
-  /** The pick, e.g. "Home win". Shown above the odds. */
-  market?: string;
-  /** Odds exactly as displayed, e.g. "2.10". */
+  /** Odds exactly as displayed, e.g. "2.10". Shown with an "Odds subject to change" note. */
   odds?: string;
   /** Up to three highlighted terms, e.g. Stake / You get / Min legs. */
   terms?: PowerPlayTerm[];
@@ -117,8 +115,6 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
     });
 
     const odds = text(item.odds, `${n} odds`, 12);
-    const market = text(item.market, `${n} pick`, 40);
-    if (market && !odds) throw new Error(`${n}: add odds for the pick, or clear the pick`);
 
     const image = text(item.image, `${n} image`, 200);
     if (image && !isImagePath(image)) throw new Error(`${n} image is not a valid image path`);
@@ -128,7 +124,6 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
       name: text(item.name, `${n} promo name`, 40),
       title: text(item.title, `${n} match or parlay`, 80, true),
       kickoff: text(item.kickoff, `${n} when`, 40, true),
-      market,
       odds,
       terms,
       legs,

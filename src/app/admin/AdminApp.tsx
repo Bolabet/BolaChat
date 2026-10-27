@@ -507,12 +507,9 @@ function PowerPlayEditor({
         <TextInput label="Promo name" value={item.name} placeholder="Weekend Special"
           hint="Optional - shown next to POWERPLAY in the card header."
           onChange={(name) => onChange({ name })} />
-        <div className="grid grid-cols-2 gap-4">
-          <TextInput label="Pick" value={item.market} placeholder={example.market}
-            onChange={(market) => onChange({ market })} />
-          <TextInput label="Odds" value={item.odds} placeholder={example.odds}
-            onChange={(odds) => onChange({ odds })} />
-        </div>
+        <TextInput label="Odds" value={item.odds} placeholder={example.odds}
+          hint="Shown with an &quot;Odds subject to change&quot; note. Update here when they move."
+          onChange={(odds) => onChange({ odds })} />
         <TextInput label="Minimum stake" value={item.minStake} placeholder={example.minStake}
           hint="With a bonus, shows &quot;Play X or more and get Y back&quot;."
           onChange={(minStake) => onChange({ minStake })} />

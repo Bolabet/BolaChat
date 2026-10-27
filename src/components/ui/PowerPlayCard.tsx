@@ -55,10 +55,11 @@ export function PowerPlayCard({
           <p className="font-heading text-lg normal-case">{play.title}</p>
           {hasOdds && (
             <div className="shrink-0 text-right">
-              {play.market && <p className="text-xs text-muted">{play.market}</p>}
+              <p className="text-xs text-muted">Odds</p>
               <p className="text-xl font-extrabold tabular-nums text-accent">
                 {play.odds}
               </p>
+              <p className="text-[0.625rem] text-muted">Subject to change</p>
             </div>
           )}
         </div>
