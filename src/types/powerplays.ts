@@ -5,11 +5,11 @@
  *
  * Only `id`, `title` and `kickoff` are required; every other block on the
  * card is shown only when it's filled in, so one shape covers both an
- * odds-boost pick ("Arsenal vs Chelsea, Home win 2.10, K50 -> 50% back") and
+ * odds-boost pick ("Arsenal 2.10 / Draw 3.40 / Chelsea 3.20, K50 -> 50% back") and
  * a promo like "Weekend Special: Bet $1 on a combo, get $1 in freebets".
  */
 
-/** A highlighted label/value pair, e.g. { label: "Min legs", value: "5" }. */
+/** A label/value pair, e.g. { label: "Min legs", value: "5" } or { label: "Arsenal", value: "2.10" }. */
 export interface PowerPlayTerm {
   label: string;
   value: string;
@@ -24,10 +24,8 @@ export interface PowerPlay {
   title: string;
   /** When it plays, exactly as it should be displayed, e.g. "Sat 8pm". */
   kickoff: string;
-  /** The pick, e.g. "Home win". Shown above the odds. */
-  market?: string;
-  /** Odds exactly as displayed, e.g. "2.10". */
-  odds?: string;
+  /** Up to three prices, e.g. Arsenal 2.10 / Draw 3.40 / Chelsea 3.20. Shown with an "Odds subject to change" note. */
+  odds?: PowerPlayTerm[];
   /** Up to three highlighted terms, e.g. Stake / You get / Min legs. */
   terms?: PowerPlayTerm[];
   /** Parlay legs or extra detail, one line each. */
@@ -50,6 +48,18 @@ export interface PowerPlaysContent {
 }
 
 export const MAX_TERMS = 3;
+export const MAX_ODDS = 3;
+
+/**
+ * Default odds labels for a title: "Chelsea vs Man United" gives
+ * ["Chelsea", "Draw", "Man United"]; anything else (a parlay) gives ["Odds"].
+ */
+export function defaultOddsLabels(title: string): string[] {
+  const teams = title.split(/\s+(?:vs?\.?)\s+/i).map((team) => team.trim());
+  return teams.length === 2 && teams[0] && teams[1]
+    ? [teams[0], "Draw", teams[1]]
+    : ["Odds", "", ""];
+}
 const MAX_ITEMS = 24;
 const IMAGE_PATH = /^\/images\/[A-Za-z0-9 _.,()/-]+\.(jpe?g|png|webp)$/i;
 
@@ -79,6 +89,32 @@ function compact<T extends object>(value: T): T {
   ) as T;
 }
 
+/** Parses a list of label/value rows, dropping blank ones. */
+function pairs(
+  input: unknown,
+  what: string,
+  max: number,
+  labelMax: number,
+  valueMax: number
+): PowerPlayTerm[] {
+  const rows = (Array.isArray(input) ? input : [])
+    .map((row, j) => {
+      const r = (row ?? {}) as Record<string, unknown>;
+      return {
+        label: text(r.label, `${what} ${j + 1} label`, labelMax),
+        value: text(r.value, `${what} ${j + 1} value`, valueMax),
+      };
+    })
+    .filter((row) => row.label || row.value);
+  if (rows.length > max) throw new Error(`${what}: at most ${max}`);
+  rows.forEach((row, j) => {
+    if (!row.label || !row.value) {
+      throw new Error(`${what} ${j + 1} needs both a label and a value`);
+    }
+  });
+  return rows;
+}
+
 /** Validates untrusted input (from the admin API) and returns a clean copy. */
 export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
   if (!input || typeof input !== "object") throw new Error("Invalid content");
@@ -100,25 +136,15 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
       .filter(Boolean);
     if (legs.length > 12) throw new Error(`${n} has too many detail lines`);
 
-    const terms = (Array.isArray(item.terms) ? item.terms : [])
-      .map((term, j) => {
-        const t = (term ?? {}) as Record<string, unknown>;
-        return {
-          label: text(t.label, `${n} highlight ${j + 1} label`, 24),
-          value: text(t.value, `${n} highlight ${j + 1} value`, 32),
-        };
-      })
-      .filter((term) => term.label || term.value);
-    if (terms.length > MAX_TERMS) throw new Error(`${n} has more than ${MAX_TERMS} highlights`);
-    terms.forEach((term, j) => {
-      if (!term.label || !term.value) {
-        throw new Error(`${n} highlight ${j + 1} needs both a label and a value`);
-      }
-    });
-
-    const odds = text(item.odds, `${n} odds`, 12);
-    const market = text(item.market, `${n} pick`, 40);
-    if (market && !odds) throw new Error(`${n}: add odds for the pick, or clear the pick`);
+    const terms = pairs(item.terms, `${n} highlight`, MAX_TERMS, 24, 32);
+    // A plain string is the older single-odds format.
+    const odds = pairs(
+      typeof item.odds === "string" ? [{ label: "Odds", value: item.odds }] : item.odds,
+      `${n} odds`,
+      MAX_ODDS,
+      40,
+      12
+    );
 
     const image = text(item.image, `${n} image`, 200);
     if (image && !isImagePath(image)) throw new Error(`${n} image is not a valid image path`);
@@ -128,7 +154,6 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
       name: text(item.name, `${n} promo name`, 40),
       title: text(item.title, `${n} match or parlay`, 80, true),
       kickoff: text(item.kickoff, `${n} when`, 40, true),
-      market,
       odds,
       terms,
       legs,
