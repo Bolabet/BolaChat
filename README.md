@@ -81,6 +81,8 @@ src/
     MarketPage.tsx      The one page template every market route renders
     layout/             Header, Footer
     sections/           Hero, PowerPlays, HowItWorks, WhyMessaging, SportsGrid, FinalCta
+  content/
+    powerplays/         <code>.json - weekly PowerPlays, edited via /admin
     ui/                 Button, ChannelButtons, Container, Badge, SectionHeading, SportArt, ChatMockup, WhatsAppIcon, TelegramIcon
   config/
     markets/            zm.ts / mw.ts / zw.ts / index.ts - see "Market configuration" below
@@ -176,6 +178,46 @@ in a parent with a fixed aspect ratio (`aspect-[4/3]`) and uses `object-cover`, 
 shift. `<SportArt />` is kept as a fallback placeholder but is no longer
 used on the page.
 
+## PowerPlays admin (`/admin`)
+
+The weekly PowerPlays section on each market page is edited through a
+password-protected admin panel at `bolachat.africa/admin` - no code changes
+needed.
+
+- **What you can edit**: per market, the section background image and the
+  list of this week's PowerPlays (add, edit, reorder, remove). Each
+  PowerPlay has a match/parlay name and a "when" line; everything else is
+  optional and only shows on the card when filled in - pick + odds, minimum
+  stake + bonus ("Play K50 or more and get 50% back"), a promo name
+  ("Weekend Special"), up to three highlights (Stake / You get / Min legs),
+  parlay legs, a description, and a card image.
+- **With no PowerPlays listed** the site shows the market's illustrative
+  example card (`copy.powerPlayExample` in the market config), labelled
+  "Example", exactly as before.
+- **How saving works**: content lives in
+  `src/content/powerplays/<code>.json` and uploaded images in
+  `public/images/powerplays/`. "Save & publish" commits both to GitHub in a
+  single commit, which triggers the normal deploy - the live site updates
+  once that deploy finishes (a couple of minutes). Market pages stay fully
+  static; only the `/api/admin/*` routes run server-side. If two people
+  edit at once, the second save is refused with a "reload" message rather
+  than overwriting the first.
+- **Images** can be JPG, PNG or WebP. Large photos are resized in the
+  browser (max 2000px) before upload.
+
+### Setup (hosting environment variables)
+
+| Variable | Value |
+|---|---|
+| `ADMIN_PASSWORD` | The admin sign-in password. Use a long one. Unset = admin disabled. |
+| `ADMIN_SESSION_SECRET` | Optional random string for signing the session cookie (defaults to `ADMIN_PASSWORD`). |
+| `ADMIN_GITHUB_TOKEN` | A GitHub fine-grained personal access token limited to this repo with **Contents: Read and write**. |
+| `ADMIN_GITHUB_REPO` | Optional, defaults to `Bolabet/BolaChat`. |
+| `ADMIN_GITHUB_BRANCH` | Optional, the branch the site deploys from - defaults to `main`. |
+
+See `.env.example`. Locally, `npm run dev` without `ADMIN_GITHUB_TOKEN`
+saves straight to the files in your working copy instead of GitHub.
+
 ## Installation & local development
 
 ```bash
@@ -194,9 +236,9 @@ npm run start
 ```
 
 `npm run build` must complete with zero errors before anything is pushed.
-It currently prerenders every route as static HTML (`/`, `/zm`, `/mw`,
-`/zw`, `/robots.txt`, `/sitemap.xml`) - there's no server-side runtime
-requirement, which keeps hosting simple wherever this ends up.
+It prerenders every public route as static HTML (`/`, `/zm`, `/mw`,
+`/zw`, `/robots.txt`, `/sitemap.xml`). The only server-side code is the
+`/api/admin/*` routes behind the PowerPlays admin (see above).
 
 ## Working without local dev (GitHub web editor -> Vercel)
 
@@ -220,7 +262,8 @@ If you're editing through the GitHub web UI rather than cloning locally:
 This app deliberately avoids anything Vercel-only:
 
 - No Vercel-specific middleware, edge config, or `@vercel/*` packages.
-- No ISR / on-demand revalidation - every route is fully static.
+- No ISR / on-demand revalidation - every public route is fully static.
+  The admin API routes use only standard `fetch` and `node:crypto`.
 - Metadata (`robots.ts`, `sitemap.ts`) uses the standard Next.js Metadata
   API, which works the same regardless of host.
 

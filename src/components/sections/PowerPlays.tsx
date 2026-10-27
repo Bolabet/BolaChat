@@ -1,19 +1,32 @@
 import Image from "next/image";
 import type { MarketConfig } from "@/types/market";
+import type { PowerPlay } from "@/types/powerplays";
+import { getPowerPlays } from "@/content/powerplays";
 import { Container } from "@/components/ui/Container";
 import { ChannelButtons } from "@/components/ui/ChannelButtons";
 import { channelNames } from "@/lib/channels";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { BolaSlash } from "@/components/ui/BolaSlash";
+import { PowerPlayCard } from "@/components/ui/PowerPlayCard";
+import { cx } from "@/lib/utils";
 
+/**
+ * This week's PowerPlays come from `src/content/powerplays/<code>.json`,
+ * edited through /admin. With no PowerPlays listed, the market's example
+ * card (config `copy.powerPlayExample`) is shown instead, labelled "Example".
+ */
 export function PowerPlays({ market }: { market: MarketConfig }) {
-  const example = market.copy.powerPlayExample;
+  const { backgroundImage, items } = getPowerPlays(market.marketCode);
+  const { fixture, ...exampleRest } = market.copy.powerPlayExample;
+  const example: PowerPlay = { id: "example", title: fixture, ...exampleRest };
+  const plays = items.length ? items : [example];
+  // One card sits beside the heading; several get a grid underneath it.
+  const sideBySide = plays.length === 1;
 
   return (
     <section className="relative isolate overflow-hidden border-y border-border bg-background py-16 sm:py-20">
       {/* Stadium backdrop with a dark overlay so copy stays legible. */}
       <Image
-        src="/images/sports/soccer-kick.jpg"
+        src={backgroundImage}
         alt=""
         fill
         sizes="100vw"
@@ -23,7 +36,12 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-gradient-to-r from-background/95 via-background/85 to-background/70"
       />
-      <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <Container
+        className={cx(
+          "grid gap-10",
+          sideBySide && "lg:grid-cols-2 lg:items-center lg:gap-16"
+        )}
+      >
         <div>
           <SectionHeading
             eyebrow="New this week"
@@ -64,37 +82,17 @@ export function PowerPlays({ market }: { market: MarketConfig }) {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-md border border-border bg-background-elevated-2/90 p-6 backdrop-blur-sm sm:p-8">
-          <BolaSlash className="absolute -right-6 -top-6 h-16 w-16 opacity-90" />
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            Powerplay
-          </p>
-          <p className="mt-1 text-xs text-muted">
-            Example - {example.kickoff}
-          </p>
-
-          <div className="mt-4 flex items-center justify-between gap-4 border-b border-border pb-4">
-            <p className="font-heading text-lg normal-case">{example.fixture}</p>
-            <div className="text-right">
-              <p className="text-xs text-muted">{example.market}</p>
-              <p className="text-xl font-extrabold tabular-nums text-accent">
-                {example.odds}
-              </p>
-            </div>
-          </div>
-
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            Play{" "}
-            <strong className="text-foreground">
-              <span className="tabular-nums">{example.minStake}</span> or more
-            </strong>{" "}
-            and get{" "}
-            <strong className="text-foreground">
-              {example.bonusPercent} back
-            </strong>{" "}
-            as real balance - win or lose.
-          </p>
-        </div>
+        {sideBySide ? (
+          <PowerPlayCard play={plays[0]} isExample={!items.length} />
+        ) : (
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {plays.map((play) => (
+              <li key={play.id} className="flex">
+                <PowerPlayCard play={play} className="w-full" />
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </section>
   );
