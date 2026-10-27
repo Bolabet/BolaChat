@@ -1,4 +1,28 @@
 {
   "backgroundImage": "/images/sports/soccer-kick.jpg",
-  "items": []
+  "items": [
+    {
+      "id": "kxzi8nzf",
+      "name": "Weekend Special",
+      "title": "Chelsea vs Man United",
+      "kickoff": "31 Oct - 14h30",
+      "odds": [
+        {
+          "label": "Chelsea",
+          "value": "1.85"
+        },
+        {
+          "label": "Draw",
+          "value": "3.95"
+        },
+        {
+          "label": "Man United",
+          "value": "4.00"
+        }
+      ],
+      "minStake": "$1",
+      "bonusPercent": "100%",
+      "image": "/images/powerplays/zw-1793103778695-fe9a62.png"
+    }
+  ]
 }
