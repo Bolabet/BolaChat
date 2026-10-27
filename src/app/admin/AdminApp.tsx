@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import type { MarketCode, MarketCopy } from "@/types/market";
-import { MAX_TERMS, type PowerPlay, type PowerPlayTerm, type PowerPlaysContent } from "@/types/powerplays";
+import {
+  MAX_ODDS,
+  MAX_TERMS,
+  defaultOddsLabels,
+  type PowerPlay,
+  type PowerPlayTerm,
+  type PowerPlaysContent,
+} from "@/types/powerplays";
 import type { StagedImage } from "@/lib/admin/store";
 import { BolaWordmark } from "@/components/ui/BolaWordmark";
 import { cx } from "@/lib/utils";
@@ -472,12 +479,27 @@ function PowerPlayEditor({
   onRemove: () => void;
   onUpload: (file: File) => Promise<string | null>;
 }) {
+  const blank = { label: "", value: "" };
   const terms = item.terms ?? [];
-  const termRows = Array.from({ length: MAX_TERMS }, (_, i) => terms[i] ?? { label: "", value: "" });
+  const termRows = Array.from({ length: MAX_TERMS }, (_, i) => terms[i] ?? blank);
+  const odds = item.odds ?? [];
+  const oddsRows = Array.from({ length: MAX_ODDS }, (_, i) => odds[i] ?? blank);
+  const oddsLabels = defaultOddsLabels(item.title || example.fixture);
 
   function setTerm(i: number, patch: Partial<PowerPlayTerm>) {
     const next = termRows.map((term, j) => (j === i ? { ...term, ...patch } : term));
     onChange({ terms: next });
+  }
+
+  function setOdd(i: number, patch: Partial<PowerPlayTerm>) {
+    const next = oddsRows.map((odd, j) => {
+      if (j !== i) return odd;
+      const row = { ...odd, ...patch };
+      // Typing a price into an unlabelled row fills in the team name.
+      if (patch.value && !odd.label && !odd.value) row.label = oddsLabels[i] ?? "";
+      return row;
+    });
+    onChange({ odds: next });
   }
 
   return (
@@ -507,14 +529,34 @@ function PowerPlayEditor({
         <TextInput label="Promo name" value={item.name} placeholder="Weekend Special"
           hint="Optional - shown next to POWERPLAY in the card header."
           onChange={(name) => onChange({ name })} />
-        <TextInput label="Odds" value={item.odds} placeholder={example.odds}
-          hint="Shown with an &quot;Odds subject to change&quot; note. Update here when they move."
-          onChange={(odds) => onChange({ odds })} />
         <TextInput label="Minimum stake" value={item.minStake} placeholder={example.minStake}
           hint="With a bonus, shows &quot;Play X or more and get Y back&quot;."
           onChange={(minStake) => onChange({ minStake })} />
         <TextInput label="Bonus back" value={item.bonusPercent} placeholder={example.bonusPercent}
           onChange={(bonusPercent) => onChange({ bonusPercent })} />
+
+        <fieldset className="sm:col-span-2">
+          <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">
+            Odds (optional)
+          </legend>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {oddsRows.map((odd, i) => (
+              <div key={i} className="grid grid-cols-[1fr_5rem] gap-2">
+                <input className={inputClass} aria-label={`Odds ${i + 1} label`}
+                  placeholder={oddsLabels[i] || "Label"} value={odd.label}
+                  onChange={(e) => setOdd(i, { label: e.target.value })} />
+                <input className={inputClass} aria-label={`Odds ${i + 1} price`} inputMode="decimal"
+                  placeholder={["2.10", "3.40", "3.20"][i]} value={odd.value}
+                  onChange={(e) => setOdd(i, { value: e.target.value })} />
+              </div>
+            ))}
+          </div>
+          <span className="mt-1 block text-xs text-muted">
+            Team names fill in from the match title. The site adds &quot;Odds subject to
+            change&quot; - update the prices here when they move. For a parlay, use just the
+            first box.
+          </span>
+        </fieldset>
 
         <fieldset className="sm:col-span-2">
           <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">

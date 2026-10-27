@@ -16,7 +16,6 @@ export function PowerPlayCard({
   isExample?: boolean;
   className?: string;
 }) {
-  const hasOdds = Boolean(play.odds);
 
   return (
     <div
@@ -46,21 +45,30 @@ export function PowerPlayCard({
           {isExample ? `Example - ${play.kickoff}` : play.kickoff}
         </p>
 
-        <div
-          className={cx(
-            "mt-4 border-b border-border pb-4",
-            hasOdds && "flex items-center justify-between gap-4"
-          )}
-        >
+        <div className="mt-4 border-b border-border pb-4">
           <p className="font-heading text-lg normal-case">{play.title}</p>
-          {hasOdds && (
-            <div className="shrink-0 text-right">
-              <p className="text-xs text-muted">Odds</p>
-              <p className="text-xl font-extrabold tabular-nums text-accent">
-                {play.odds}
-              </p>
-              <p className="text-[0.625rem] text-muted">Subject to change</p>
-            </div>
+          {play.odds && play.odds.length > 0 && (
+            <>
+              <dl
+                className={cx(
+                  "mt-3 grid gap-2",
+                  play.odds.length === 3 ? "grid-cols-3" : play.odds.length === 2 ? "grid-cols-2" : "grid-cols-1"
+                )}
+              >
+                {play.odds.map((odd) => (
+                  <div
+                    key={odd.label}
+                    className="min-w-0 rounded-sm border border-border bg-background/60 px-3 py-2 text-center"
+                  >
+                    <dt className="truncate text-xs text-muted">{odd.label}</dt>
+                    <dd className="text-lg font-extrabold tabular-nums text-accent">
+                      {odd.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-2 text-[0.625rem] text-muted">Odds subject to change</p>
+            </>
           )}
         </div>
 

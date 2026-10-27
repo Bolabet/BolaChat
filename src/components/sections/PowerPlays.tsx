@@ -17,7 +17,14 @@ import { cx } from "@/lib/utils";
 export function PowerPlays({ market }: { market: MarketConfig }) {
   const { backgroundImage, items } = getPowerPlays(market.marketCode);
   const { fixture, kickoff, odds, minStake, bonusPercent } = market.copy.powerPlayExample;
-  const example: PowerPlay = { id: "example", title: fixture, kickoff, odds, minStake, bonusPercent };
+  const example: PowerPlay = {
+    id: "example",
+    title: fixture,
+    kickoff,
+    odds: [{ label: "Odds", value: odds }],
+    minStake,
+    bonusPercent,
+  };
   const plays = items.length ? items : [example];
   // One card sits beside the heading; several get a grid underneath it.
   const sideBySide = plays.length === 1;
