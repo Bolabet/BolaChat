@@ -6,6 +6,7 @@ import {
   MAX_ODDS,
   MAX_TERMS,
   defaultOddsLabels,
+  isExpired,
   type PowerPlay,
   type PowerPlayTerm,
   type PowerPlaysContent,
@@ -57,6 +58,18 @@ async function prepareImage(file: File): Promise<Blob> {
       0.85
     )
   );
+}
+
+/** ISO timestamp -> value for <input type="datetime-local"> in the admin's own time zone. */
+function toLocalInput(iso?: string): string {
+  if (!iso) return "";
+  const date = new Date(iso);
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
+}
+
+/** <input type="datetime-local"> value (admin's local time) -> ISO timestamp. */
+function fromLocalInput(value: string): string | undefined {
+  return value ? new Date(value).toISOString() : undefined;
 }
 
 function newId(): string {
@@ -479,6 +492,9 @@ function PowerPlayEditor({
   onRemove: () => void;
   onUpload: (file: File) => Promise<string | null>;
 }) {
+  // Fixed when the editor opens; good enough to flag cards that have ended.
+  const [now] = useState(() => Date.now());
+  const expired = isExpired(item, now);
   const blank = { label: "", value: "" };
   const terms = item.terms ?? [];
   const termRows = Array.from({ length: MAX_TERMS }, (_, i) => terms[i] ?? blank);
@@ -507,6 +523,11 @@ function PowerPlayEditor({
       <div className="mb-4 flex items-center justify-between gap-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-accent">
           PowerPlay {index + 1}
+          {expired && (
+            <span className="ml-2 rounded-sm bg-danger/15 px-2 py-0.5 text-danger">
+              Expired - hidden on the site
+            </span>
+          )}
         </p>
         <div className="flex gap-2">
           <AdminButton onClick={() => onMove(-1)} disabled={index === 0} aria-label="Move up">
@@ -529,6 +550,22 @@ function PowerPlayEditor({
         <TextInput label="Promo name" value={item.name} placeholder="Weekend Special"
           hint="Optional - shown next to POWERPLAY in the card header."
           onChange={(name) => onChange({ name })} />
+        <Field
+          label="End date (optional)"
+          hint="Your local time. After this the card comes down from the site automatically."
+        >
+          <div className="flex gap-2">
+            <input
+              type="datetime-local"
+              className={inputClass}
+              value={toLocalInput(item.endsAt)}
+              onChange={(e) => onChange({ endsAt: fromLocalInput(e.target.value) })}
+            />
+            {item.endsAt && (
+              <AdminButton onClick={() => onChange({ endsAt: undefined })}>Clear</AdminButton>
+            )}
+          </div>
+        </Field>
         <TextInput label="Minimum stake" value={item.minStake} placeholder={example.minStake}
           hint="With a bonus, shows &quot;Play X or more and get Y back&quot;."
           onChange={(minStake) => onChange({ minStake })} />

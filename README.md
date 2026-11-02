@@ -191,7 +191,13 @@ needed.
   stake + bonus ("Play K50 or more and get 50% back"), a promo name
   ("Weekend Special"), up to three highlights (Stake / You get / Min legs),
   parlay legs, a description, and a card image.
-- **With no PowerPlays listed** the site shows the market's illustrative
+- **End dates**: each PowerPlay can have an optional end date and time
+  (entered in the admin's local time). Once it passes, the card comes
+  down from the site on its own - it's dropped at build time, and hidden
+  in the visitor's browser for anything that ends between deploys, so no
+  redeploy is needed. Expired PowerPlays stay in the admin, marked
+  "Expired", so they can be edited and reused or removed.
+- **With no PowerPlays listed** (or all of them expired) the site shows the market's illustrative
   example card (`copy.powerPlayExample` in the market config), labelled
   "Example", exactly as before.
 - **How saving works**: content lives in

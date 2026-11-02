@@ -38,6 +38,8 @@ export interface PowerPlay {
   description?: string;
   /** Optional card image, a path under /public (e.g. "/images/powerplays/x.jpg"). */
   image?: string;
+  /** Optional end, an ISO timestamp. After it the card is no longer shown on the site. */
+  endsAt?: string;
 }
 
 export interface PowerPlaysContent {
@@ -45,6 +47,11 @@ export interface PowerPlaysContent {
   backgroundImage: string;
   /** This week's PowerPlays, in display order. Empty = show the market's example card. */
   items: PowerPlay[];
+}
+
+/** True once a PowerPlay's end date has passed. */
+export function isExpired(play: PowerPlay, now: number): boolean {
+  return Boolean(play.endsAt) && Date.parse(play.endsAt!) <= now;
 }
 
 export const MAX_TERMS = 3;
@@ -149,6 +156,10 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
     const image = text(item.image, `${n} image`, 200);
     if (image && !isImagePath(image)) throw new Error(`${n} image is not a valid image path`);
 
+    const endsAtText = text(item.endsAt, `${n} end date`, 40);
+    const endsAtTime = endsAtText ? Date.parse(endsAtText) : NaN;
+    if (endsAtText && Number.isNaN(endsAtTime)) throw new Error(`${n} end date is not a valid date`);
+
     return compact({
       id,
       name: text(item.name, `${n} promo name`, 40),
@@ -161,6 +172,7 @@ export function parsePowerPlaysContent(input: unknown): PowerPlaysContent {
       bonusPercent: text(item.bonusPercent, `${n} bonus`, 20),
       description: text(item.description, `${n} description`, 200),
       image,
+      endsAt: endsAtText ? new Date(endsAtTime).toISOString() : "",
     });
   });
 
