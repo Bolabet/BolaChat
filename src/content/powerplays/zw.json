@@ -21,6 +21,26 @@
       ],
       "minStake": "$1",
       "bonusPercent": "$1"
+    },
+    {
+      "id": "7eexrrh6",
+      "title": "Man Utd vs Aston Villa",
+      "kickoff": "08 Nov - 18h30",
+      "terms": [
+        {
+          "label": "Stake",
+          "value": "$1"
+        },
+        {
+          "label": "You get",
+          "value": "$1 freebet"
+        },
+        {
+          "label": "Min legs",
+          "value": "5"
+        }
+      ],
+      "minStake": "$1"
     }
   ]
 }
